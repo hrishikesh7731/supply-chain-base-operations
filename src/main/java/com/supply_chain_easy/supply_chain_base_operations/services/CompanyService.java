@@ -6,7 +6,9 @@ import com.supply_chain_easy.supply_chain_base_operations.models.Role;
 import com.supply_chain_easy.supply_chain_base_operations.models.User;
 import com.supply_chain_easy.supply_chain_base_operations.transformers.SystemTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CompanyService {
 
     private final RoleService roleService;

@@ -5,10 +5,12 @@ import com.supply_chain_easy.supply_chain_base_operations.models.Role;
 import com.supply_chain_easy.supply_chain_base_operations.repositories.RoleRepository;
 import com.supply_chain_easy.supply_chain_base_operations.utilites.SystemUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class RoleService {
 
     private final OperationService operationService;
