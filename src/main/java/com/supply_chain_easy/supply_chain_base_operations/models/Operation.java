@@ -1,5 +1,6 @@
 package com.supply_chain_easy.supply_chain_base_operations.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -17,4 +18,7 @@ public class Operation extends GlobalRecord{
     private String operationId;
     private String operationName;
     private String operationCategory;
+
+    @Column(name = "application_code", nullable = false)
+    private String applicationCode;
 }

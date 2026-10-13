@@ -22,9 +22,9 @@ public class RoleService {
         this.roleRepository=roleRepository;
     }
 
-    public Role createAdminRole(String companyName){
+    public Role createAdminRole(String companyName,String applicationCode){
 
-        List<Operation> operations= operationService.fetchAllOperations();
+        List<Operation> operations= operationService.fetchOperationsByApplication(applicationCode);
 
         Role adminrole= Role.builder()
                 .roleId(SystemUtility.generateId("ROLE"))
