@@ -19,6 +19,6 @@ public class Operation extends GlobalRecord{
     private String operationName;
     private String operationCategory;
 
-    @Column(name = "application_code", nullable = false)
+    @Column(name = "application_code")
     private String applicationCode;
 }

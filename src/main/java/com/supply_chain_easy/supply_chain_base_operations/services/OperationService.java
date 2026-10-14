@@ -1,5 +1,7 @@
+
 package com.supply_chain_easy.supply_chain_base_operations.services;
 
+import com.supply_chain_easy.supply_chain_base_operations.enums.ApplicationCode;
 import com.supply_chain_easy.supply_chain_base_operations.models.Operation;
 import com.supply_chain_easy.supply_chain_base_operations.repositories.OperationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,7 @@ public class OperationService {
         return operationRepository.findAll();
     }
 
-    public List<Operation> fetchOperationsByApplication(String applicationCode) {
-
-        return operationRepository.findByApplicationCode(applicationCode);
+    public List<Operation> fetchOperationsByApplication(ApplicationCode applicationCode) {
+        return operationRepository.findByApplicationCode(applicationCode.name());
     }
 }

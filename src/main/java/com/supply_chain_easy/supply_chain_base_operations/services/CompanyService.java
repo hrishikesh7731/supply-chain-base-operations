@@ -1,5 +1,6 @@
 package com.supply_chain_easy.supply_chain_base_operations.services;
 
+import com.supply_chain_easy.supply_chain_base_operations.enums.ApplicationCode;
 import com.supply_chain_easy.supply_chain_base_operations.models.Company;
 import com.supply_chain_easy.supply_chain_base_operations.models.Employee;
 import com.supply_chain_easy.supply_chain_base_operations.models.Role;
@@ -19,7 +20,7 @@ public class CompanyService {
         this.employeeService=employeeService;
     }
 
-    public Employee createAdminUserForCompany(Company company, String applicationCode){
+    public Employee createAdminUserForCompany(Company company, ApplicationCode applicationCode){
         Role adminRole= roleService.createAdminRole(company.getLegalName(),applicationCode);
         Employee adminUser= SystemTransformer.mapCompanyToAdminEmployee(company,adminRole);
         return employeeService.save(adminUser);

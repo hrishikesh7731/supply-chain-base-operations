@@ -1,5 +1,6 @@
 package com.supply_chain_easy.supply_chain_base_operations.services;
 
+import com.supply_chain_easy.supply_chain_base_operations.enums.ApplicationCode;
 import com.supply_chain_easy.supply_chain_base_operations.models.Operation;
 import com.supply_chain_easy.supply_chain_base_operations.models.Role;
 import com.supply_chain_easy.supply_chain_base_operations.repositories.RoleRepository;
@@ -22,7 +23,7 @@ public class RoleService {
         this.roleRepository=roleRepository;
     }
 
-    public Role createAdminRole(String companyName,String applicationCode){
+    public Role createAdminRole(String companyName, ApplicationCode applicationCode){
 
         List<Operation> operations= operationService.fetchOperationsByApplication(applicationCode);
 
