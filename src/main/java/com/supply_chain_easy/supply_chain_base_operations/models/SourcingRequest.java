@@ -30,6 +30,7 @@ public class SourcingRequest extends Request {
 
     private Instant evaluationDeadline;
 
+    @Column(nullable = false)
     private Integer targetSupplierCount;
 
     @Column(length = 2000)

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "product_categories")
 @Entity
 public class ProductCategory extends GlobalRecord {
-    @Column(name = "category_code", nullable = false, length = 50)
+    @Column(name = "category_code", nullable = false, unique = true, length = 50)
     private String categoryCode;
 
     @Column(name = "category_name", nullable = false, length = 150)

@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @Table(name = "products")
 public class Product extends GlobalRecord {
 
-    @Column(name = "product_code", nullable = false, length = 50)
+    @Column(name = "product_code", nullable = false, unique = true, length = 50)
     private String productCode;
 
     @Column(name = "product_name", nullable = false, length = 200)

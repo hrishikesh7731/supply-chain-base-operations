@@ -1,9 +1,8 @@
 package com.supply_chain_easy.supply_chain_base_operations.models;
 
 import com.supply_chain_easy.supply_chain_base_operations.enums.EmploymentStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.supply_chain_easy.supply_chain_base_operations.enums.EmploymentType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,7 +31,8 @@ public class Employee extends User {
 
     private String jobTitle;
     private String designation;
-    private String employeeType;
+    @Enumerated(EnumType.STRING)
+    private EmploymentType employeeType;
     private EmploymentStatus employmentStatus;
     private LocalDate joiningDate;
     private LocalDate exitDate;

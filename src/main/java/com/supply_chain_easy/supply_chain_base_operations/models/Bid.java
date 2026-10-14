@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Entity
 public class Bid extends GlobalRecord {
 
-    @Column(name = "bid_number", nullable = false, length = 50)
+    @Column(name = "bid_number", nullable = false, unique = true, length = 50)
     private String bidNumber;
 
     @ManyToOne

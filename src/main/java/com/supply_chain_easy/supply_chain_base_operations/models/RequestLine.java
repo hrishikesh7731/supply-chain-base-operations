@@ -12,7 +12,8 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "request_lines")
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "purchase_request_lines")
 @Entity
 public class RequestLine extends GlobalRecord{
     @Column(nullable = false)

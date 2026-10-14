@@ -3,6 +3,7 @@ package com.supply_chain_easy.supply_chain_base_operations.transformers;
 import com.supply_chain_easy.supply_chain_base_operations.constants.SystemConstant;
 import com.supply_chain_easy.supply_chain_base_operations.enums.AuthenticationProvider;
 import com.supply_chain_easy.supply_chain_base_operations.enums.EmploymentStatus;
+import com.supply_chain_easy.supply_chain_base_operations.enums.EmploymentType;
 import com.supply_chain_easy.supply_chain_base_operations.enums.UserStatus;
 import com.supply_chain_easy.supply_chain_base_operations.models.Company;
 import com.supply_chain_easy.supply_chain_base_operations.models.Employee;
@@ -54,7 +55,7 @@ public class SystemTransformer {
                 .employeeId(SystemUtility.generateId("EMPLOYEE"))
                 .jobTitle("Company Administrator")
                 .designation("Administrator")
-                .employeeType("FULL_TIME")
+                .employeeType(EmploymentType.FULL_TIME)
                 .employmentStatus(EmploymentStatus.ACTIVE)
                 .joiningDate(LocalDate.now())
                 .approvalLimit(BigDecimal.valueOf(999999999))
