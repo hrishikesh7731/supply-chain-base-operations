@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.supply-chain-easy</groupId>
 	<artifactId>supply-chain-base-operations</artifactId>
-	<version>4.0.0</version>
+	<version>4.0.1</version>
 	<name/>
 	<description/>
 	<url/>
@@ -43,6 +43,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+			<version>42.7.14</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
