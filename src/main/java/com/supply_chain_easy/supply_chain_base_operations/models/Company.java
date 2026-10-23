@@ -25,7 +25,6 @@ public class Company extends GlobalRecord {
     private String companyId;
     private String legalName;
     private String displayName;
-    private String companyCode;
     private String registrationNumber;
     private CompanyType companyType;
 
