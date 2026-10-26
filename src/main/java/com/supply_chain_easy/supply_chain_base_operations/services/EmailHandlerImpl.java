@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class EmailHandlerImpl implements NotificationHandler{
 
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
 
     @Autowired
     public EmailHandlerImpl(JavaMailSender javaMailSender){
@@ -40,8 +40,8 @@ public class EmailHandlerImpl implements NotificationHandler{
                 notification.setNotificationStatus(NotificationStatus.IN_QUEUE);
             }
         }
-        catch{
-            log.error("unable to send email for this notification={}",notification.toString());
+        catch (Exception e) {
+            log.error("Unable to send email for this notification={}", notification, e);
             notification.setNotificationStatus(NotificationStatus.FAILED);
         }
     }
