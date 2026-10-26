@@ -1,10 +1,7 @@
 package com.supply_chain_easy.supply_chain_base_operations.utilites;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class SystemUtility {
 
@@ -43,5 +40,25 @@ public class SystemUtility {
         password.forEach(sb::append);
 
         return sb.toString();
+    }
+
+    public static String replaceTemplateVariableWithValues(
+            String template,
+            HashMap<String, String> variableValues) {
+
+        if (template == null || template.isEmpty() || variableValues == null) {
+            return template;
+        }
+
+        String result = template;
+
+        for (Map.Entry<String, String> entry : variableValues.entrySet()) {
+            String variable = "${" + entry.getKey() + "}";
+            String value = entry.getValue() != null ? entry.getValue() : "";
+
+            result = result.replace(variable, value);
+        }
+
+        return result;
     }
 }
