@@ -8,15 +8,13 @@ Java 17, Spring Boot, Spring Data JPA, Maven
 
 ## What's Inside
 
-| Package | Contents |
+| Area | Description |
 |---|---|
-| `models` | Shared entities such as Company, ProcurementCompany, SupplierCompany, Employee, User, Role, Product, ProductCategory, PurchaseRequest, SourcingRequest, Bid, Attachment, Activity and Notification |
-| `repositories` | Repositories for companies, procurement and supplier companies, employees, roles and operations |
-| `enums` | Shared status, type and category enums (company, request, bid, product, notification, user and more) |
-| `services` | Company, employee, role and operation services, including user and administrator creation logic |
-| `services` (notification) | Notification service with email, SMS and WhatsApp handlers behind a common `NotificationHandler` interface, plus notification templates, priorities and statuses |
-| `configurations`, `constants` | Shared system configuration and constants |
-| `transformers`, `utilities` | System transformer and utility classes |
+| Domain models and repositories | Shared entities and data-access repositories used by both applications |
+| Enums and constants | Shared status, type and category enums, plus common configuration and constants |
+| Company, employee, role and user management | Reusable services, including user and administrator creation logic |
+| Notification service | Extensible, multi-channel notification service with a common handler interface |
+| Utilities and transformers | Common system utilities and data transformers |
 
 ## Used By
 
