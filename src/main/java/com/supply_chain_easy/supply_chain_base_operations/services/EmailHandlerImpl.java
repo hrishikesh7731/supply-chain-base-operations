@@ -88,8 +88,6 @@ public class EmailHandlerImpl implements NotificationHandler{
         mimeMessageHelper.setSubject(subjectLine);
         mimeMessageHelper.setText(emailBody, true);
 
-        RetryService.retry(() -> {
-            javaMailSender.send(mimeMessage);
-        });
+        RetryService.retry(() -> javaMailSender.send(mimeMessage));
     }
 }
