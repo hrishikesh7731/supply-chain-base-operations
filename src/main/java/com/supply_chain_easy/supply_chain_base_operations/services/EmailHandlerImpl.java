@@ -30,11 +30,17 @@ public class EmailHandlerImpl implements NotificationHandler{
     public Notification send(Notification notification) {
         try{
             if(notification.getNotificationPriority().equals(NotificationPriority.URGENT)){
+                this.sendEmail(notification);
+                notification.setEmailFailed(false);
 
             }else if(notification.getNotificationPriority().equals(NotificationPriority.NORMAL) &&
                     notification.getNotificationStatus().equals(NotificationStatus.IN_QUEUE)){
+                this.sendEmail(notification);
+                notification.setEmailFailed(false);
 
             }else if(notification.isEmailFailed()){
+                notification.setNotificationStatus(NotificationStatus.IN_QUEUE);
+                notification.setEmailFailed(true);
 
             }else{
                 notification.setNotificationStatus(NotificationStatus.IN_QUEUE);
@@ -42,8 +48,11 @@ public class EmailHandlerImpl implements NotificationHandler{
         }
         catch (Exception e) {
             log.error("Unable to send email for this notification={}", notification, e);
+            notification.setFailureMessage(notification.getFailureMessage()+" [EMAIL] "+e.getMessage());
+            notification.setEmailFailed(true);
             notification.setNotificationStatus(NotificationStatus.FAILED);
         }
+        return notification;
     }
 
     public void sendEmail(Notification notification) throws MessagingException {
@@ -79,6 +88,8 @@ public class EmailHandlerImpl implements NotificationHandler{
         mimeMessageHelper.setSubject(subjectLine);
         mimeMessageHelper.setText(emailBody, true);
 
-        javaMailSender.send(mimeMessage);
+        RetryService.retry(() -> {
+            javaMailSender.send(mimeMessage);
+        });
     }
 }
