@@ -30,8 +30,12 @@ public class NotificationService {
         if (notification.isEmail()) {
             log.info("Email notification selected. ID: {}", notification.getSysId());
             this.emailHandlerimpl.send(notification);
-            notification.setEmailDelivered(true);
-            log.info("Email notification delivered. ID: {}", notification.getSysId());
+
+            if (notification.isEmailDelivered()) {
+                log.info("Email notification delivered. ID: {}", notification.getSysId());
+            } else {
+                log.warn("Email notification was not delivered. ID: {}", notification.getSysId());
+            }
         }
 
         if (notification.isSMS()) {
@@ -45,14 +49,22 @@ public class NotificationService {
                     notification.getSysId());
             notification.setWhatsAppDelivered(true);
         }
-        if(notification.isEmailDelivered() && notification.isSMSDelivered() && notification.isWhatsAppDelivered()) {
+        if ((notification.isEmail() || notification.isSMS() || notification.isWhatsApp())
+                && (!notification.isEmail() || notification.isEmailDelivered())
+                && (!notification.isSMS() || notification.isSMSDelivered())
+                && (!notification.isWhatsApp() || notification.isWhatsAppDelivered())) {
+
             notification.setNotificationStatus(NotificationStatus.DELIVERED);
-            log.info("Email notification has been delivered.");
+            log.info("Notification has be delivered. ID: {}", notification.getSysId());
         }
+        this.notificationRepository.save(notification);
         return notification;
     }
 
     public List<Notification> fetchByNotificationStatus(NotificationStatus notificationStatus) {
         return this.notificationRepository.findByNotificationStatus(notificationStatus);
+    }
+    public void saveNotification(Notification notification) {
+        notificationRepository.save(notification);
     }
 }

@@ -43,4 +43,5 @@ public class Notification extends GlobalRecord{
     private NotificationPriority notificationPriority;
     @Enumerated(EnumType.STRING)
     private NotificationStatus notificationStatus;
+    private int retryCount = 0;
 }

@@ -46,6 +46,7 @@ public class EmailHandlerImpl implements NotificationHandler {
                 log.info("Sending urgent notification. ID: {}", notification.getSysId());
 
                 this.sendEmail(notification);
+                notification.setEmailDelivered(true);
                 notification.setEmailFailed(false);
 
             } else if (notification.getNotificationPriority().equals(NotificationPriority.NORMAL)
@@ -54,6 +55,7 @@ public class EmailHandlerImpl implements NotificationHandler {
                 log.info("Sending queued normal notification. ID: {}", notification.getSysId());
 
                 this.sendEmail(notification);
+                notification.setEmailDelivered(true);
                 notification.setEmailFailed(false);
 
             } else if (notification.isEmailFailed()) {
