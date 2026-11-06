@@ -133,10 +133,9 @@ public class EmailHandlerImpl implements NotificationHandler {
         log.debug("Email template variables replaced. Notification ID: {}",
                 notification.getSysId());
 
+
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
-
         mimeMessageHelper.setTo(toUsers.toArray(new String[0]));
         mimeMessageHelper.setCc(ccUsers.toArray(new String[0]));
         mimeMessageHelper.setBcc(bccUsers.toArray(new String[0]));
