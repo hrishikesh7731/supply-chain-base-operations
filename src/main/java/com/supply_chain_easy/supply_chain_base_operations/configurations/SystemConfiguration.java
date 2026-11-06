@@ -1,5 +1,6 @@
 package com.supply_chain_easy.supply_chain_base_operations.configurations;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,9 +12,11 @@ import java.util.concurrent.Executors;
 @Configuration
 public class SystemConfiguration {
 
-    public String apiEmailAddress = "6206472735rahul@gmail.com";
+    @Value("${MAIL_USERNAME}")
+    private String apiEmailAddress;
 
-    public String apiEmailPassword = "ceffelhhjfderwei";
+    @Value("${MAIL_PASSWORD}")
+    private String apiEmailPassword;
 
     @Bean
     public JavaMailSender createJavaMailSender(){
