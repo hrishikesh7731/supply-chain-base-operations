@@ -1,3 +1,4 @@
+
 package com.supply_chain_easy.supply_chain_base_operations.services;
 
 import com.supply_chain_easy.supply_chain_base_operations.enums.NotificationStatus;
@@ -6,8 +7,10 @@ import com.supply_chain_easy.supply_chain_base_operations.repositories.Notificat
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Component
@@ -17,19 +20,27 @@ public class NotificationService {
     private final NotificationRepository notificationRepository;
 
     @Autowired
-    public NotificationService(EmailHandlerImpl emailHandlerimpl, NotificationRepository notificationRepository) {
+    public NotificationService(
+            EmailHandlerImpl emailHandlerimpl,
+            NotificationRepository notificationRepository) {
         this.emailHandlerimpl = emailHandlerimpl;
         this.notificationRepository = notificationRepository;
     }
 
+    @Transactional
     public Notification sendNotification(Notification notification) {
+
         log.info("Processing notification. ID: {}", notification.getSysId());
 
-        this.notificationRepository.save(notification);
+        // Fetch a managed entity inside the active transaction
+        notification = notificationRepository.findById(notification.getSysId())
+                .orElseThrow(() ->
+                        new RuntimeException("Notification not found"));
 
         if (notification.isEmail()) {
             log.info("Email notification selected. ID: {}", notification.getSysId());
-            this.emailHandlerimpl.send(notification);
+
+            emailHandlerimpl.send(notification);
 
             if (notification.isEmailDelivered()) {
                 log.info("Email notification delivered. ID: {}", notification.getSysId());
@@ -49,21 +60,26 @@ public class NotificationService {
                     notification.getSysId());
             notification.setWhatsAppDelivered(true);
         }
+
         if ((notification.isEmail() || notification.isSMS() || notification.isWhatsApp())
                 && (!notification.isEmail() || notification.isEmailDelivered())
                 && (!notification.isSMS() || notification.isSMSDelivered())
                 && (!notification.isWhatsApp() || notification.isWhatsAppDelivered())) {
 
             notification.setNotificationStatus(NotificationStatus.DELIVERED);
-            log.info("Notification has be delivered. ID: {}", notification.getSysId());
+            log.info("Notification has been delivered. ID: {}", notification.getSysId());
         }
-        this.notificationRepository.save(notification);
+
+        notificationRepository.save(notification);
+
         return notification;
     }
 
-    public List<Notification> fetchByNotificationStatus(NotificationStatus notificationStatus) {
-        return this.notificationRepository.findByNotificationStatus(notificationStatus);
+    public List<Notification> fetchByNotificationStatus(
+            NotificationStatus notificationStatus) {
+        return notificationRepository.findByNotificationStatus(notificationStatus);
     }
+
     public void saveNotification(Notification notification) {
         notificationRepository.save(notification);
     }
