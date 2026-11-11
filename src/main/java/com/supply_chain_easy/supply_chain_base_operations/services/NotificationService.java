@@ -1,4 +1,5 @@
 package com.supply_chain_easy.supply_chain_base_operations.services;
+
 import com.supply_chain_easy.supply_chain_base_operations.enums.NotificationStatus;
 import com.supply_chain_easy.supply_chain_base_operations.models.Notification;
 import com.supply_chain_easy.supply_chain_base_operations.repositories.NotificationRepository;
@@ -6,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Slf4j
@@ -55,6 +57,7 @@ public class NotificationService {
                 && (!notification.isEmail() || notification.isEmailDelivered())
                 && (!notification.isSMS() || notification.isSMSDelivered())
                 && (!notification.isWhatsApp() || notification.isWhatsAppDelivered())) {
+
             notification.setNotificationStatus(NotificationStatus.DELIVERED);
             log.info("Notification has been delivered. ID: {}", notification.getSysId());
         }
@@ -75,7 +78,7 @@ public class NotificationService {
                 );
     }
 
-    public void saveNotification(Notification notification) {
-        notificationRepository.save(notification);
+    public Notification saveNotification(Notification notification) {
+        return notificationRepository.save(notification);
     }
 }
