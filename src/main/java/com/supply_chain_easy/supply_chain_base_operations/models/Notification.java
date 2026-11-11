@@ -4,6 +4,7 @@ import com.supply_chain_easy.supply_chain_base_operations.enums.NotificationPrio
 import com.supply_chain_easy.supply_chain_base_operations.enums.NotificationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -43,5 +44,6 @@ public class Notification extends GlobalRecord{
     private NotificationPriority notificationPriority;
     @Enumerated(EnumType.STRING)
     private NotificationStatus notificationStatus;
+    @Builder.Default
     private int retryCount = 0;
 }
