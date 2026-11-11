@@ -11,5 +11,10 @@ import java.util.UUID;
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, UUID> {
 
-    public List<Notification> findByNotificationStatus(NotificationStatus notificationStatus);
+    List<Notification> findByNotificationStatus(NotificationStatus notificationStatus);
+
+    List<Notification> findByNotificationStatusAndRetryCountLessThan(
+            NotificationStatus notificationStatus,
+            int retryCount
+    );
 }
