@@ -4,7 +4,6 @@ import com.supply_chain_easy.supply_chain_base_operations.enums.AuthenticationPr
 import com.supply_chain_easy.supply_chain_base_operations.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
