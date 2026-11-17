@@ -17,4 +17,9 @@ public class EmployeeService {
     public Employee save(Employee employee){
         return employeeRepository.save(employee);
     }
+
+    public Employee getEmployeeByWorkEmail(String workEmail){
+        return this.employeeRepository.getEmployeeByWorkEmail(workEmail);
+
+    }
 }

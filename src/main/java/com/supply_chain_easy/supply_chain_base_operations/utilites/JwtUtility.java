@@ -6,13 +6,14 @@ import com.supply_chain_easy.supply_chain_base_operations.models.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-
+import org.springframework.stereotype.Component;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+@Component
 public class JwtUtility{
 
     private final Key key;
